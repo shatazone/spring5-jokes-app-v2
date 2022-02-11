@@ -1,7 +1,9 @@
-package com.shatazone.jokesapp;
+package com.shatazone.jokesapp.controllers;
 
 import com.shatazone.jokesapp.services.JokeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class JokeController {
@@ -11,7 +13,9 @@ public class JokeController {
         this.jokeService = jokeService;
     }
     
-    public String getJoke() {
-        return jokeService.getJoke();
+    @RequestMapping({"/", ""})
+    public String showJoke(Model model) {
+        model.addAttribute("joke", jokeService.getJoke());
+        return "index";
     }
 }
